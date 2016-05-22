@@ -129,7 +129,7 @@ ShoppingList.prototype.onEditFocusOut = function(event) {
 ShoppingList.prototype.onDeleteItemClicked = function(event) {
     var id = $(event.target).parents('li').data('id');
     this.deleteItem(id);
-
+    console.log('clicked ' + name + ' ' + id);
 };
 ShoppingList.prototype.getItems = function() {
     var ajax = $.ajax('/items', {

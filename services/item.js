@@ -30,13 +30,12 @@ exports.list = function(callback, errback) {
 //model.findOneAndUpdate
 
 //Model.remove
-exports.delete = function(name, callback, errback){
-  Item.remove({name: name}, function(err, item){
-    if (err) {
-      errback(err);
-      return;
-    }
-    console.log('log from services');
-    callback(item);
+exports.delete = function(id, callback, errback){
+  Item.findOneAndRemove({id: id}, function(err, item){
+      if (err){
+        errback(err);
+        return;
+      }
+      callback(item);
   });
 };

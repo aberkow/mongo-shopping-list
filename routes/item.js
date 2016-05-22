@@ -12,17 +12,19 @@ router.get('/items', function(req, res){
 
 router.post('/items', function(req, res){
   Item.save(req.body.name, function(item){
-    console.log('log from routes');
+    console.log('log from routes ' + req.body.name + ' ' + req.body._id);
+    debugger;
     res.status(201).json(item);
   }, function(err){
     res.status(400).json(err);
   });
 });
 
-router.delete('/items', function(req, res){
-  Item.delete(req.body.name, function(item){
-    console.log('log from routes');
-    res.sendStatus(200);
+//needed to use req.params.id! to get the right id to show up. still isn't deleting, but closer.
+router.delete('/items/:id', function(req, res){
+  Item.delete(req.params.id, function(item){
+    console.log('log from routes - delete ' + req.params.id);
+    res.status(200).json(item);
   }, function(err){
     res.status(400).json(err);
   });
