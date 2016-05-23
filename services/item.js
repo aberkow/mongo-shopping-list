@@ -27,7 +27,17 @@ exports.list = function(callback, errback) {
   });
 };
 
-//model.findOneAndUpdate
+//model.update
+exports.update = function(id, newName, callback, errback){
+  Item.findOneAndUpdate({id: id}, {name: newName}, function(err, item){
+    if (err) {
+      errback(err);
+      return;
+    }
+    console.log('services ' + newName);
+    callback(item);
+  });
+};
 
 //Model.remove
 exports.delete = function(id, callback, errback){
@@ -36,6 +46,8 @@ exports.delete = function(id, callback, errback){
         errback(err);
         return;
       }
+      console.log('services ' + item);
       callback(item);
+      debugger;
   });
 };
