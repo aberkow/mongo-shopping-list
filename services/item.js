@@ -10,9 +10,7 @@ exports.save = function(name, callback, errback){
       errback(err);
       return;
     }
-    console.log('log from services');
     callback(item);
-    console.log('log from services again');
   });
 };
 
@@ -29,24 +27,24 @@ exports.list = function(callback, errback) {
 
 //model.update
 exports.update = function(id, newName, callback, errback){
-  Item.findOneAndUpdate({id: id}, {name: newName}, function(err, item){
+  Item.findOneAndUpdate({_id: id}, {$set: {name: newName}}, {new: true}, function(err, item){
     if (err) {
       errback(err);
       return;
     }
-    console.log('services ' + newName);
+    console.log('services ', newName);
     callback(item);
   });
 };
 
 //Model.remove
 exports.delete = function(id, callback, errback){
-  Item.findOneAndRemove({id: id}, function(err, item){
+  Item.findByIdAndRemove(id, function(err, item){
       if (err){
         errback(err);
         return;
       }
-      console.log('services ' + item);
+      console.log('services', item);
       callback(item);
       debugger;
   });
