@@ -26,26 +26,47 @@ exports.list = function(callback, errback) {
 };
 
 //model.update
+//_id is the query. This finds the item.
+// exports.update = function(id, newName, callback, errback){
+//   Item.findOneAndUpdate({_id: id}, {$set: {name: newName}}, {new: true}, function(err, item){
+//     if (err) {
+//       errback(err);
+//       return;
+//     }
+//     console.log('services ', newName);
+//     callback(item);
+//   });
+// };
+
 exports.update = function(id, newName, callback, errback){
-  Item.findOneAndUpdate({_id: id}, {$set: {name: newName}}, {new: true}, function(err, item){
+  Item.findByIdAndUpdate(id, {name: newName}, {new: true}, function(err, item){
     if (err) {
       errback(err);
       return;
     }
-    console.log('services ', newName);
     callback(item);
   });
 };
 
 //Model.remove
+// exports.delete = function(id, callback, errback){
+//   Item.findByIdAndRemove(id, function(err, item){
+//       if (err){
+//         errback(err);
+//         return;
+//       }
+//       console.log('services', item);
+//       callback(item);
+//       debugger;
+//   });
+// };
+
 exports.delete = function(id, callback, errback){
-  Item.findByIdAndRemove(id, function(err, item){
-      if (err){
+  Item.findOneAndRemove({_id: id}, function(err, item){
+      if (err) {
         errback(err);
         return;
       }
-      console.log('services', item);
       callback(item);
-      debugger;
   });
 };

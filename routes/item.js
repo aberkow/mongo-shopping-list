@@ -12,7 +12,7 @@ router.get('/items', function(req, res){
 
 router.post('/items', function(req, res){
   Item.save(req.body.name, function(item){
-    console.log('log from routes ' + req.body.name + ' ' + req.body._id);
+    console.log('log from routes', req.body.name, req.body.id);
     debugger;
     res.status(201).json(item);
   }, function(err){
