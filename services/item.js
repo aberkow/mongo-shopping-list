@@ -39,6 +39,7 @@ exports.list = function(callback, errback) {
 // };
 
 exports.update = function(id, newName, callback, errback){
+  //setting new to true allows for creating and updating items. check to see if it works with false.
   Item.findByIdAndUpdate(id, {name: newName}, {new: true}, function(err, item){
     if (err) {
       errback(err);
